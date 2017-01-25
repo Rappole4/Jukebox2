@@ -8,7 +8,7 @@ SC.initialize({
 });
 
 // below allows you to search songs
-SC.get('/tracks/66301726',{
+SC.get('/tracks/46051523',{
 	q:""
 }).then(function(response){
 	console.log(response);
@@ -43,7 +43,7 @@ function jukeBox(){
 	}
 	this.listInfo = function(){
 		console.log(information[currentTrack]);
-		return information[currentTrack].title;
+		return "<a target=\"_blank\" href=" + information[currentTrack].permalink_url + ">" + information[currentTrack].title + "</a>" + "<br>" + "<img src=" + information[currentTrack].artwork_url + ">";
 	}
 }
 
@@ -89,7 +89,7 @@ next.onclick = function() {
 		}  
 
 	spans = document.getElementById("span");
-	spans.innerText = Info1.listInfo();
+	spans.innerHTML = Info1.listInfo();
 	console.log(currentTrack,tracks,tracks[currentTrack]);
 
 	if( !players[currentTrack] ) {
