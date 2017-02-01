@@ -24,14 +24,14 @@ SC.get('/tracks',{
 	var next = document.getElementById("next");
 
 
-	var realAlbum1 = new jukeBox();
-	document.getElementById("submit1").onclick = function(){
-		var track = document.getElementById("song1").value;
-		realAlbum1.addSong( track )
-		SC.get('/tracks/'+ track ).then(function(response){
-			information.push(response);
-		})
-	}
+	// var realAlbum1 = new jukeBox();
+	// document.getElementById("submit1").onclick = function(){
+	// 	var track = document.getElementById("song1").value;
+	// 	realAlbum1.addSong( track )
+	// 	SC.get('/tracks/'+ track ).then(function(response){
+	// 		information.push(response);
+	// 	})
+	// }
 
 //Add extra song to list
 function jukeBox(){
@@ -53,6 +53,13 @@ function jukeBox(){
 
 //display information stuff
 	var Info1 = new jukeBox();
+	document.getElementById("submit1").onclick = function(){
+		var track = document.getElementById("song1").value;
+		Info1.addSong( track )
+		SC.get('/tracks/'+ track ).then(function(response){
+			information.push(response);
+		})
+	}
 	function getTrackInfo(index) {
 	  if( !index ) index = 0;  // set to 0 if we forget to put an index
 	  if( index < tracks.length) {
