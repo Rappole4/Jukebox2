@@ -8,30 +8,30 @@ SC.initialize({
 });
 
 // below allows you to search songs
-SC.get('/tracks/66301726',{
-	q:""
+SC.get('/tracks',{
+	q:"I'm a fighter"
 }).then(function(response){
 	console.log(response);
 })
 
 //below all of our created variables
-	 tracks = ['66301726','46051523','79084857','2912004','117335458'];
-	 players = [];
-	 information = [];
-	 currentTrack = 0;
+	var tracks = ['66301726','46051523','79084857','2912004','117335458'];
+	var players = [];
+	var information = [];
+	var currentTrack = 0;
 	var plays = document.getElementById("play");
 	var stops = document.getElementById("stop");
 	var next = document.getElementById("next");
 
 
-	var realAlbum1 = new jukeBox();
-	document.getElementById("submit1").onclick = function(){
-		var track = document.getElementById("song1").value;
-		realAlbum1.addSong( track )
-		SC.get('/tracks/'+ track ).then(function(response){
-			information.push(response);
-		})
-	}
+	// var realAlbum1 = new jukeBox();
+	// document.getElementById("submit1").onclick = function(){
+	// 	var track = document.getElementById("song1").value;
+	// 	realAlbum1.addSong( track )
+	// 	SC.get('/tracks/'+ track ).then(function(response){
+	// 		information.push(response);
+	// 	})
+	// }
 
 //Add extra song to list
 function jukeBox(){
@@ -43,12 +43,23 @@ function jukeBox(){
 	}
 	this.listInfo = function(){
 		console.log(information[currentTrack]);
-		return "<a target=\"_blank\" href=" + information[currentTrack].permalink_url + ">" + information[currentTrack].title + "</a>" + "<br>" + "<img src=" + information[currentTrack].artwork_url + ">";
+		if (information[currentTrack].artwork_url == null) {
+			return "<a target=\"_blank\" href=" + information[currentTrack].permalink_url + ">" + information[currentTrack].title + "</a>";
+		}	else {
+			return "<a target=\"_blank\" href=" + information[currentTrack].permalink_url + ">" + information[currentTrack].title + "</a>" + "<br>" + "<img src=" + information[currentTrack].artwork_url + ">";
+		}
 	}
 }
 
 //display information stuff
 	var Info1 = new jukeBox();
+	document.getElementById("submit1").onclick = function(){
+		var track = document.getElementById("song1").value;
+		Info1.addSong( track )
+		SC.get('/tracks/'+ track ).then(function(response){
+			information.push(response);
+		})
+	}
 	function getTrackInfo(index) {
 	  if( !index ) index = 0;  // set to 0 if we forget to put an index
 	  if( index < tracks.length) {
