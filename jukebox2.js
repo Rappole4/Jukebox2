@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded",function(){
 
 //allows access to sound clouds library
 SC.initialize({
-	client_id: 'fd4e76fc67798bfa742089ed619084a6'
+	client_id: ''
 });
 
 // below allows you to search songs
